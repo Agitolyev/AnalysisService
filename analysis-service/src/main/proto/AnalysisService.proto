@@ -1,0 +1,15 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.github.agitolyev;
+
+service AnalysisService {
+    rpc Analyze(AnalysisRequest) returns (AnalysisReply) {}
+}
+
+message AnalysisRequest {
+    string text = 1;
+}
+
+message AnalysisReply {
+    string text = 2;
+}

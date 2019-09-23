@@ -1,0 +1,46 @@
+version: "3.7"
+services:
+  redis:
+    container_name: redis
+    image: redis
+    expose:
+      - "6379"
+  presidio-recognizers-store:
+    container_name: presidio-recognizers-store
+    image: "${DOCKER_REGISTRY}/presidio-recognizers-store:${PRESIDIO_LABEL}"
+    environment:
+      - GRPC_PORT=3004
+      - REDIS_URL=redis:6379
+    expose:
+      - "3004"
+    depends_on:
+      - redis
+  presidio-api:
+    container_name: presidio-api
+    image: "${DOCKER_REGISTRY}/presidio-api:${PRESIDIO_LABEL}"
+    environment:
+      - WEB_PORT=8093
+      - ANALYZER_SVC_ADDRESS=presidio-analyzer:3000
+      - ANONYMIZER_SVC_ADDRESS=presidio-anonymizer:3001
+      - RECOGNIZERS_STORE_SVC_ADDRESS=presidio-recognizers-store:3004
+    ports:
+      - "8080:8080"
+    depends_on:
+      - presidio-analyzer
+      - presidio-anonymizer
+      - presidio-recognizers-store
+    command: /bin/sh -c "sleep 30 && /usr/bin/presidio-api"
+  presidio-analyzer:
+    container_name: presidio-analyzer
+    image: "${DOCKER_REGISTRY}/presidio-analyzer:${PRESIDIO_LABEL}"
+    environment:
+      - GRPC_PORT=3000
+    expose:
+      - "3000"
+  presidio-anonymizer:
+    container_name: presidio-anonymizer
+    image: "${DOCKER_REGISTRY}/presidio-anonymizer:${PRESIDIO_LABEL}"
+    environment:
+      - GRPC_PORT=3001
+    expose:
+      - "3001"
