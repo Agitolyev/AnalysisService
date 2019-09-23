@@ -1,19 +1,30 @@
 package com.github.agitolyev;
 
+import com.github.agitolyev.analysis.AnalysisServiceConfig;
+import com.github.agitolyev.analysis.AnalysisServiceImpl;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import okhttp3.OkHttpClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Hello world!
+ * Main class.
  */
 public class App {
-  public static void main(String[] args) throws Exception {
-    Server server = ServerBuilder.forPort(8080)
-        .addService(new AnalysisServiceImpl()).build();
+    private static final Logger logger = LoggerFactory.getLogger(App.class);
 
-    System.out.println("Starting server...");
-    server.start();
-    System.out.println("Server started!");
-    server.awaitTermination();
-  }
+    private static final String DEFAULT_PORT = "8080";
+    private static final String PORT_KEY = "GRPC_PORT";
+
+    public static void main(String[] args) throws Exception {
+        Integer port = Integer.valueOf(System.getProperty(PORT_KEY, DEFAULT_PORT));
+        logger.info("Going to start server on port: {}", port);
+        Server server = ServerBuilder.forPort(port)
+                .addService(new AnalysisServiceImpl(AnalysisServiceConfig.fromEnv(), new OkHttpClient())).build();
+        logger.info("Starting server...");
+        server.start();
+        logger.info("Server started!");
+        server.awaitTermination();
+    }
 }
