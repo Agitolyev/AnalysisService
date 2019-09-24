@@ -19,7 +19,7 @@ public class AnalysisServiceImpl extends AnalysisServiceImplBase {
 
     private static final Logger logger = LoggerFactory.getLogger(AnalysisServiceConfig.class);
 
-    private static final String ANONYMIZE_URL_PATTERN = "%s/api/v1/projects/%s/anonymize";
+    private static final String ANONYMIZE_URL_PATTERN = "http://%s/api/v1/projects/%s/anonymize";
 
     private final OkHttpClient client;
 
