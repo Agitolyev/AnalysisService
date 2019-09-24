@@ -18,9 +18,9 @@ public class App {
     private static final String PORT_KEY = "GRPC_PORT";
 
     public static void main(String[] args) throws Exception {
-        Integer port = Integer.valueOf(System.getProperty(PORT_KEY, DEFAULT_PORT));
+        final Integer port = Integer.valueOf(System.getProperty(PORT_KEY, DEFAULT_PORT));
         logger.info("Going to start server on port: {}", port);
-        Server server = ServerBuilder.forPort(port)
+        final Server server = ServerBuilder.forPort(port)
                 .addService(new AnalysisServiceImpl(AnalysisServiceConfig.fromEnv(), new OkHttpClient())).build();
         logger.info("Starting server...");
         server.start();
