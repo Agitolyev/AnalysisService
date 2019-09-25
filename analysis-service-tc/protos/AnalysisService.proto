@@ -1,0 +1,14 @@
+syntax = "proto3";
+package com.github.agitolyev;
+
+service AnalysisService {
+    rpc Analyze(AnalysisRequest) returns (AnalysisReply) {}
+}
+
+message AnalysisRequest {
+    string text = 1;
+}
+
+message AnalysisReply {
+    string text = 2;
+}
