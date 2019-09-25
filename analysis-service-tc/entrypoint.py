@@ -16,7 +16,7 @@ if __name__ == '__main__':
             print("Analysis service is up")
             break
         else:
-            # TODO: add analysis service polling as rediness probe
+            # TODO: add analysis service polling as readiness probe
             time.sleep(40)
     sock.close()
     os.system('python3 /analysis-service-tc/analysis_service_test.py')
