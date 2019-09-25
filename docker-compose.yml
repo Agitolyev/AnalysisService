@@ -5,6 +5,23 @@ services:
     image: redis
     expose:
       - "6379"
+  test:
+    build: ./analysis-service-tc
+    environment:
+      - ANALYSIS_SVC_ADDRESS=analysis-service:8080
+    depends_on:
+      - analysis-service
+  analysis-service:
+    container_name: analysis-service
+    build: ./analysis-service
+    environment:
+      - GRPC_PORT=8080
+      - PRESIDIO_API_SVC_ADDRESS=presidio-api:8093
+      - PRESIDIO_PROJECT_NAME=default
+    ports:
+      - "8080:8080"
+    depends_on:
+      - presidio-api
   presidio-recognizers-store:
     container_name: presidio-recognizers-store
     image: "${DOCKER_REGISTRY}/presidio-recognizers-store:${PRESIDIO_LABEL}"
@@ -24,7 +41,7 @@ services:
       - ANONYMIZER_SVC_ADDRESS=presidio-anonymizer:3001
       - RECOGNIZERS_STORE_SVC_ADDRESS=presidio-recognizers-store:3004
     ports:
-      - "8080:8080"
+      - "8093:8093"
     depends_on:
       - presidio-analyzer
       - presidio-anonymizer
