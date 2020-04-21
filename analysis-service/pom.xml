@@ -17,7 +17,7 @@
     <mockito.version>2.10.0</mockito.version>
     <okhttp.version>4.2.0</okhttp.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+    <protobuf-java-util.version>3.9.2</protobuf-java-util.version>
     <mainClass>com.github.agitolyev.App</mainClass>
   </properties>
 
@@ -36,6 +36,11 @@
       <groupId>io.grpc</groupId>
       <artifactId>grpc-stub</artifactId>
       <version>${grpc.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java-util</artifactId>
+      <version>${protobuf-java-util.version}</version>
     </dependency>
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>

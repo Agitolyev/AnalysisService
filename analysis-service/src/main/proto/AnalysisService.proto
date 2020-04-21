@@ -4,6 +4,15 @@ package com.github.agitolyev;
 
 service AnalysisService {
     rpc Analyze(AnalysisRequest) returns (AnalysisReply) {}
+    rpc Anonymize(AnonymizationRequest) returns (AnonymizationReply) {}
+}
+
+message AnonymizationRequest {
+    string text = 1;
+}
+
+message AnonymizationReply {
+    string text = 2;
 }
 
 message AnalysisRequest {
@@ -11,5 +20,26 @@ message AnalysisRequest {
 }
 
 message AnalysisReply {
-    string text = 2;
+
+    repeated AnalysisToken tokens = 1;
+
 }
+
+message AnalysisToken {
+    Field field = 1;
+
+    double score = 2;
+
+    Location location = 3;
+
+    message Field {
+        string name =1;
+    }
+
+    message Location {
+        uint32 start = 1;
+        uint32 end = 2;
+        uint32 length = 3;
+    }
+}
+

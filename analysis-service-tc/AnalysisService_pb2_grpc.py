@@ -5,42 +5,92 @@ import AnalysisService_pb2 as AnalysisService__pb2
 
 
 class AnalysisServiceStub(object):
-  # missing associated documentation comment in .proto file
-  pass
+    """Missing associated documentation comment in .proto file"""
 
-  def __init__(self, channel):
-    """Constructor.
+    def __init__(self, channel):
+        """Constructor.
 
-    Args:
-      channel: A grpc.Channel.
-    """
-    self.Analyze = channel.unary_unary(
-        '/com.github.agitolyev.AnalysisService/Analyze',
-        request_serializer=AnalysisService__pb2.AnalysisRequest.SerializeToString,
-        response_deserializer=AnalysisService__pb2.AnalysisReply.FromString,
-        )
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.Analyze = channel.unary_unary(
+                '/com.github.agitolyev.AnalysisService/Analyze',
+                request_serializer=AnalysisService__pb2.AnalysisRequest.SerializeToString,
+                response_deserializer=AnalysisService__pb2.AnalysisReply.FromString,
+                )
+        self.Anonymize = channel.unary_unary(
+                '/com.github.agitolyev.AnalysisService/Anonymize',
+                request_serializer=AnalysisService__pb2.AnonymizationRequest.SerializeToString,
+                response_deserializer=AnalysisService__pb2.AnonymizationReply.FromString,
+                )
 
 
 class AnalysisServiceServicer(object):
-  # missing associated documentation comment in .proto file
-  pass
+    """Missing associated documentation comment in .proto file"""
 
-  def Analyze(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
+    def Analyze(self, request, context):
+        """Missing associated documentation comment in .proto file"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Anonymize(self, request, context):
+        """Missing associated documentation comment in .proto file"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
 
 def add_AnalysisServiceServicer_to_server(servicer, server):
-  rpc_method_handlers = {
-      'Analyze': grpc.unary_unary_rpc_method_handler(
-          servicer.Analyze,
-          request_deserializer=AnalysisService__pb2.AnalysisRequest.FromString,
-          response_serializer=AnalysisService__pb2.AnalysisReply.SerializeToString,
-      ),
-  }
-  generic_handler = grpc.method_handlers_generic_handler(
-      'com.github.agitolyev.AnalysisService', rpc_method_handlers)
-  server.add_generic_rpc_handlers((generic_handler,))
+    rpc_method_handlers = {
+            'Analyze': grpc.unary_unary_rpc_method_handler(
+                    servicer.Analyze,
+                    request_deserializer=AnalysisService__pb2.AnalysisRequest.FromString,
+                    response_serializer=AnalysisService__pb2.AnalysisReply.SerializeToString,
+            ),
+            'Anonymize': grpc.unary_unary_rpc_method_handler(
+                    servicer.Anonymize,
+                    request_deserializer=AnalysisService__pb2.AnonymizationRequest.FromString,
+                    response_serializer=AnalysisService__pb2.AnonymizationReply.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'com.github.agitolyev.AnalysisService', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class AnalysisService(object):
+    """Missing associated documentation comment in .proto file"""
+
+    @staticmethod
+    def Analyze(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/com.github.agitolyev.AnalysisService/Analyze',
+            AnalysisService__pb2.AnalysisRequest.SerializeToString,
+            AnalysisService__pb2.AnalysisReply.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Anonymize(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/com.github.agitolyev.AnalysisService/Anonymize',
+            AnalysisService__pb2.AnonymizationRequest.SerializeToString,
+            AnalysisService__pb2.AnonymizationReply.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)

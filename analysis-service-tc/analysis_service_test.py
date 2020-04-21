@@ -15,9 +15,9 @@ if __name__ == '__main__':
     analysis_svc_addr = os.getenv(ANALYSIS_SVC_ADDRESS_ENV_KEY, ANALYSIS_SVC_DEFAULT)
     channel = grpc.insecure_channel(analysis_svc_addr)
     stub = analysis_service_grpc.AnalysisServiceStub(channel)
-    analysisRequest = AnalysisService_pb2.AnalysisRequest()
-    analysisRequest.text = test_string
-    result = stub.Analyze(analysisRequest)
+    anonymizationRequest = AnalysisService_pb2.AnonymizationRequest()
+    anonymizationRequest.text = test_string
+    result = stub.Anonymize(anonymizationRequest)
     json_result = json.loads(result.text)
     print(f"Expected: {expected_result}\nActual: {json_result['text']}\nIdentical: {expected_result == json_result['text']}")
 

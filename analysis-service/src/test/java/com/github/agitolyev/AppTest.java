@@ -88,7 +88,7 @@ public class AppTest extends TestCase {
         AnalysisServiceGrpc.AnalysisServiceBlockingStub blockingStub = AnalysisServiceGrpc.newBlockingStub(
                 grpcCleanup.register(InProcessChannelBuilder.forName(serverName).directExecutor().build()));
         //act
-        final AnalysisReply reply = blockingStub.analyze(AnalysisRequest.newBuilder().setText(textToAnonymize).build());
+        final AnonymizationReply reply = blockingStub.anonymize(AnonymizationRequest.newBuilder().setText(textToAnonymize).build());
         //assert
         assertEquals(anonymizeResponse, reply.getText());
     }
