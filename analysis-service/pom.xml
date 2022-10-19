@@ -11,7 +11,7 @@
     <grpc.version>1.23.0</grpc.version>
     <junit.version>4.12</junit.version>
     <logback.version>1.2.3</logback.version>
-    <jackson.version>2.11.3</jackson.version>
+    <jackson.version>2.13.4.1</jackson.version>
     <maven.compiler.plugin.version>3.5.1</maven.compiler.plugin.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
